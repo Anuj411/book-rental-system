@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Create Student{% endblock title %}
+
+{% block bodycontent %}
+
+<section id="action-form-layout">
+    <div class="row match-height">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Add Student</h4> 
+            
+          </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    {{form.non_field_errors.as_text}}
+
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.full_name.label}}{% if form.full_name.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.full_name }}
+                                    {% if form.full_name.errors %}
+                                        {% for error in form.full_name.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.student_id.label}}{% if form.student_id.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.student_id }}
+                                    {% if form.student_id.errors %}
+                                        {% for error in form.student_id.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.email.label}}{% if form.email.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.email }}
+                                    {% if form.email.errors %}
+                                        {% for error in form.email.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.image.label}}{% if form.image.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.image }}
+                                    {% if form.image.errors %}
+                                        {% for error in form.image.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.phone.label}}{% if form.phone.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.phone }}
+                                    {% if form.phone.errors %}
+                                        {% for error in form.phone.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.department.label}}{% if form.department.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.department }}
+                                    {% if form.department.errors %}
+                                        {% for error in form.department.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.degree.label}}{% if form.degree.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.degree }}
+                                    {% if form.degree.errors %}
+                                        {% for error in form.degree.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.college_email.label}}{% if form.college_email.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.college_email }}
+                                    {% if form.college_email.errors %}
+                                        {% for error in form.college_email.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.semester.label}}{% if form.semester.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                <div class="col-md-9">
+                                    {{ form.semester }}
+                                    {% if form.semester.errors %}
+                                        {% for error in form.semester.errors %}
+                                        <span style="color: red;">{{error}}</span>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary mr-2"><i class="ft-check-square mr-1"></i>Save</button>
+                        <a href="{% url 'students:student_list' %}"><button type="button" class="btn btn-secondary"><i class="ft-x mr-1"></i>Cancel</button></a>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock %}

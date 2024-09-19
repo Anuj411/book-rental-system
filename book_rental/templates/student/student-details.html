@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Students Details
+{% endblock title %}
+
+{% block bodycontent %}
+
+<section id="file-export">
+  <div class="row">
+      <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <div class="d-flex flex-sm-row flex-column justify-content-between">
+                <h4 class="card-title align-self-center">Student Details</h4>
+              </div>
+            </div>
+              <div class="card-content ">
+                  <div class="card-body">
+                        <h6>Rented Books</h6>
+                      <div class="table-responsive ">
+                          <table class="table table-striped table-bordered w-100" id="rent-table">
+                              <thead>
+                                  <tr>
+                                    <th>Sr. no</th>
+                                    <th>Book</th>
+                                    <th>Checkin Date</th>
+                                    <th>Checkout Date</th>
+                                    <th>Charges ($)</th>
+                                    <th>Status</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+{% endblock %}
+
+{% block script %}
+    
+<script>
+    function set_filters(){
+        var data = {}
+        data["student"] = "{{ object.id|safe }}";
+        return data
+    }
+
+    var role = false;
+
+    function initialize_datatable(){
+        $('#rent-table').DataTable({
+            columnDefs: [{
+                    orderable: false,
+                    targets: [-1, -4],
+                }
+            ],
+            order: [[0, 'desc']],
+            processing: true,
+            language: {
+                processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>'
+            },
+            serverSide: true,
+            ajax: {
+                url: '{% url "rent:rent_book_list_ajax" %}',
+                type: 'get',
+                data: set_filters(),
+            },
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'book__title', name: 'book__title' },
+                { data: 'check_in_date', name: 'check_in_date' },
+                { data: 'check_out_date', name: 'check_out_date' },
+                { data: 'rent_charges', name: 'rent_charges' },
+                { data: 'status', name: 'status' },
+            ],
+            rowCallback: function (nRow, aData, iDisplayIndex) {
+                var oSettings = this.fnSettings();
+                $("td:first", nRow).html(oSettings._iDisplayStart + iDisplayIndex + 1);
+                return nRow;
+            },
+        });
+    }
+
+    initialize_datatable();
+
+</script>
+
+{% endblock script %}

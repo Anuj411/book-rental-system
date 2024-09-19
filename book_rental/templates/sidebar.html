@@ -1,0 +1,37 @@
+{% load static %}
+
+<div class="app-sidebar menu-fixed " data-background-color="flickr" data-scroll-to-active="true">
+  <div class="sidebar-header">
+    <div class="logo clearfix"><a class="logo-text float-left" href="{% url 'users:dashboard' %}">
+        <div class="logo-img"><img src=""  /></div class=""><span
+          class="text small">{{ request.user.full_name }}</span>
+      </a></div>
+  </div>
+
+  <div class="sidebar-content main-menu-content">
+    <div class="nav-container">
+      <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+        
+        <li class="{% if 'dashboard' in request.path or 'profile/' in request.path or 'password/change/' in request.path %}active{% endif %}"><a href="{% url 'users:dashboard' %}"><i class="ft-grid"></i><span class="menu-title"
+          data-i18n="Email">Dashboard</span></a>
+        </li>
+
+        {% if request.user.is_superuser or request.user.role == request.user.ADMIN %}
+        <li class="{% if 'students/' in request.path %}active{% endif %}"><a href="{% url 'students:student_list' %}"><i class="icon-user"></i><span class="menu-title"
+          data-i18n="Email">Student</span></a>
+        </li>
+        <li class="{% if 'rent/' in request.path %}active{% endif %}"><a href="{% url 'rent:rent_book_list' %}"><i class="ft-server"></i><span class="menu-title"
+          data-i18n="Email">Rent Book</span></a>
+        </li>
+        {% endif %}
+
+      </ul>
+    </div>
+  </div>
+  <div class="sidebar-background"></div>
+
+</div>
+<div class="main-panel">
+  <div class="main-content">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">

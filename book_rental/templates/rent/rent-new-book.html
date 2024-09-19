@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Rent new book{% endblock title %}
+
+{% block bodycontent %}
+
+<section id="action-form-layout">
+    <div class="row match-height">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Rent new book</h4> 
+            
+          </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    {{form.non_field_errors.as_text}}
+
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.check_in_date.label}}{% if form.check_in_date.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                        <div class="col-md-9">
+                                            {{ form.check_in_date }}
+                                            {% if form.check_in_date.errors %}
+                                                {% for error in form.check_in_date.errors %}
+                                                <span style="color: red;">{{error}}</span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.student.label}}{% if form.student.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                        <div class="col-md-9">
+                                            {{ form.student }}
+                                            {% if form.student.errors %}
+                                                {% for error in form.student.errors %}
+                                                <span style="color: red;">{{error}}</span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="horizontal-form-1">Book <span style="color: red;">*</span></label>
+                                        <div class="col-md-9">
+                                            <select name="book" class="form-control" id="id_book" required>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="book-details">
+                                <div class="text-center">
+                                    <h5>Book Details</h5>
+                                </div>
+                                <div>
+                                    <table>
+                                        <tr style="padding: 10px">
+                                            <th style="padding: 10px">Title</th>
+                                            <td style="padding: 10px"><span id="id_title"></span></td>
+                                        </tr>
+                                        <tr style="padding: 10px">
+                                            <th style="padding: 10px">Author</th>
+                                            <td style="padding: 10px"><span id="id_author"></span></td>
+                                        </tr>
+                                        <tr style="padding: 10px">
+                                            <th style="padding: 10px">No. of Pages</th>
+                                            <td style="padding: 10px"><span id="id_no_of_pages"></span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="title" id="id_title_input" />
+                    <input type="hidden" name="author" id="id_author_input" />
+                    <input type="hidden" name="no_of_pages" id="id_no_of_pages_input" />
+                    
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary mr-2"><i class="ft-check-square mr-1"></i>Save</button>
+                        <a href="{% url 'rent:rent_book_list' %}"><button type="button" class="btn btn-secondary"><i class="ft-x mr-1"></i>Cancel</button></a>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock %}
+
+
+
+{% block script %}
+    <script>
+
+        $(document).find(`#id_book`).select2({
+            width: "100%",
+            placeholder: "Search for a book",
+            ajax: {
+                url: "https://openlibrary.org/search.json",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    var query = {
+                        q: params.term
+                    }
+                    return query;
+                },
+                processResults: function (data) {
+                    console.log(data);
+
+                    return{
+                        results: data.docs.map(function(book) {
+                            return {
+                                id: book.key,
+                                text: book.title + ' by ' + (book.author_name ? book.author_name[0] : 'Unknown'),
+                                no_of_pages: (book.number_of_pages_median ? book.number_of_pages_median : book.number_of_pages),
+                                title: book.title,
+                                author: book.author_name,
+                            };
+                        })
+                    };
+                },
+                cache: true,
+            }
+        }).on("select2:select", function(e){
+            console.log(e.params.data);
+            $("#id_title").text(e.params.data.title);
+            $("#id_title_input").val(e.params.data.title);
+            let authors = ""
+            for(let i of e.params.data.author) {
+                authors += i
+            }
+            $("#id_author").text(authors);
+            $("#id_author_input").val(e.params.data.author);
+            $("#id_no_of_pages").text(e.params.data.no_of_pages);
+            $("#id_no_of_pages_input").val(e.params.data.no_of_pages);
+        });
+    </script>
+{% endblock script %}
+    

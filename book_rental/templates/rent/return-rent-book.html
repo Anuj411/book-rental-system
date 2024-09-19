@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Rent new book{% endblock title %}
+
+{% block bodycontent %}
+
+<section id="action-form-layout">
+    <div class="row match-height">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Return book</h4> 
+            
+          </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" novalidate>
+                    {% csrf_token %}
+                    {{form.non_field_errors.as_text}}
+
+                    <div class="row">
+                        <div class="col-md-6 col-12">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="horizontal-form-1">Checkin Date<span style="color: red;">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="date" name="check_in_date" class="form-control" id="id_check_in_date" value="{{ form.instance.check_in_date|date:"Y-m-d" }}" disabled />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="horizontal-form-1">Student<span style="color: red;">*</span></label>
+                                        <div class="col-md-9">
+                                            <input type="text" name="student" class="form-control" id="id_student" value="{{ form.instance.student.user.full_name }}" disabled />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group row">
+                                        <label class="col-md-3 col-form-label" for="horizontal-form-1">{{form.check_out_date.label}}{% if form.check_out_date.field.required %}<span style="color: red;">*</span>{% endif %}</label>
+                                        <div class="col-md-9">
+                                            {{ form.check_out_date }}
+                                            {% if form.check_out_date.errors %}
+                                                {% for error in form.check_out_date.errors %}
+                                                <span style="color: red;">{{error}}</span>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12">
+                            <div class="book-details">
+                                <div class="text-center">
+                                    <h5>Book Details</h5>
+                                </div>
+                                <div>
+                                    <table>
+                                        <tr style="padding: 10px">
+                                            <th style="padding: 10px">Title</th>
+                                            <td style="padding: 10px"><span id="id_title">{{ form.instance.book.title }}</span></td>
+                                        </tr>
+                                        <tr style="padding: 10px">
+                                            <th style="padding: 10px">Author</th>
+                                            <td style="padding: 10px"><span id="id_author">{{ form.instance.book.author }}</span></td>
+                                        </tr>
+                                        <tr style="padding: 10px">
+                                            <th style="padding: 10px">No. of Pages</th>
+                                            <td style="padding: 10px"><span id="id_no_of_pages">{{ form.instance.book.no_of_pages }}</span></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary mr-2"><i class="ft-check-square mr-1"></i>Save</button>
+                        <a href="{% url 'rent:rent_book_list' %}"><button type="button" class="btn btn-secondary"><i class="ft-x mr-1"></i>Cancel</button></a>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% endblock %}
+

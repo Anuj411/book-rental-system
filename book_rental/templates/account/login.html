@@ -1,0 +1,48 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block title %} Login Page {% endblock title %}
+
+{% block content %}
+<div class="col-lg-6 col-12 px-4 py-3" style="max-width: 415px;">
+    <h4 class="mb-2 card-title">Login</h4>
+    <p>Welcome back, please login to your account.</p>
+  
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+
+        <div class="form-group">
+            <input type="text" name="login" {% if form.login.value %}value="{{form.login.value}}"{% endif %} class="form-control" placeholder="Email">
+            {% if form.login.errors %}
+                {% for error in form.login.errors %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <input type="password" name="password" {% if form.password.value %}value="{{form.password.value}}"{% endif %} class="form-control" placeholder="Password">
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <span style="color: red;">{{error}}</span>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="d-sm-flex justify-content-between mb-1 font-small-2">
+            <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+        </div>
+
+        {% for error in form.non_field_errors %}
+          <div class="col-span-2 mt-1">
+              <span style="color: red;">{{error}}</span>
+          </div>
+        {% endfor %}
+
+        <div class="d-flex justify-content-between flex-sm-row flex-column mt-1">
+            <button class="btn btn-primary" type="submit">Login</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
