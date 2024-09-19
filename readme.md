@@ -4,7 +4,7 @@
 This system is an open-source web application designed to empower librarian and individual organizations to efficiently manage their books.
 
 
-## Key Features
+### Key Features
 
 - **Rent Book:** Easily record and rent a book to the registered students. Students can rent a book for one month without any charge. If they desire to keep the book beyond the initial month, they are
 charged a fee determined by the book's page count divided by 100. For instance, if a
