@@ -17,7 +17,7 @@ book has 300 pages, the fee would be $3.00 for every subsequent month.
 ### Installation
 
 1. Clone the repository.
-    - `git clone `
+    - `git clone https://github.com/Anuj411/book-rental-system.git`
 2. Create a new virtual environment in project directory.
     - `virtualenv venv`
 3. Activate virtual venv and install requirements.
@@ -26,4 +26,4 @@ book has 300 pages, the fee would be $3.00 for every subsequent month.
 5. Run seed command.
     - `python manage.py seed`
 6. Npw, start the django server.
-    - 'python manage.py runserver'
+    - `python manage.py runserver`
