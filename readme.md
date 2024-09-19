@@ -21,7 +21,7 @@ book has 300 pages, the fee would be $3.00 for every subsequent month.
 2. Create a new virtual environment in project directory.
     - `virtualenv venv`
 3. Activate virtual venv and install requirements.
-    - `pip install -r requirements/local.py`
+    - `pip install -r requirements/local.txt`
 4. Create .env file from .env.example file and set database configurations.
 5. Run seed command.
     - `python manage.py seed`
