@@ -25,5 +25,6 @@ book has 300 pages, the fee would be $3.00 for every subsequent month.
 4. Create .env file from .env.example file and set database configurations.
 5. Run seed command.
     - `python manage.py seed`
-6. Npw, start the django server.
+6. Now, start the django server.
     - `python manage.py runserver`
+7. You can login with admin credentials in .env file.
