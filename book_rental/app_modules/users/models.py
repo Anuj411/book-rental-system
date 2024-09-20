@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from app_modules.base.models import BaseModel
 
+
 class User(AbstractUser, BaseModel):
-    
     SUPER_ADMIN = "super admin"
     ADMIN = "admin"
     STUDENT = "student"
@@ -11,7 +11,7 @@ class User(AbstractUser, BaseModel):
     USER_ROLE = (
         (SUPER_ADMIN, "Super Admin"),
         (ADMIN, "Admin"),
-        (STUDENT, "Admin"),
+        (STUDENT, "Student"),
     )
 
     email = models.EmailField(('Email'), unique=True)

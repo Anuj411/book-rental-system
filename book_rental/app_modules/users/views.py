@@ -1,6 +1,5 @@
-from typing import Any
-from django.forms import BaseModelForm
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from app_modules.users.forms import UpdateProfileForm
@@ -9,6 +8,11 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
+
+def handler404(request, args, *argv):
+    return render(request, "404.html", status=404)
+def handler403(request, args, *argv):
+    return render(request, "403.html", status=403)
 
 class DashboardView(LoginRequiredMixin, TemplateView):
 
