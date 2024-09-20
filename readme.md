@@ -27,4 +27,4 @@ book has 300 pages, the fee would be $3.00 for every subsequent month.
     - `python manage.py seed`
 6. Now, start the django server.
     - `python manage.py runserver`
-7. You can login with admin credentials in .env file.
+7. You can login with admin credentials provided in .env file.
