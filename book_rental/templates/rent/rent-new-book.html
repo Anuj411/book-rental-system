@@ -139,15 +139,16 @@
                 cache: true,
             }
         }).on("select2:select", function(e){
-            console.log(e.params.data);
             $("#id_title").text(e.params.data.title);
             $("#id_title_input").val(e.params.data.title);
+
             let authors = ""
             for(let i of e.params.data.author) {
                 authors += i
             }
             $("#id_author").text(authors);
             $("#id_author_input").val(e.params.data.author);
+            
             $("#id_no_of_pages").text(e.params.data.no_of_pages);
             $("#id_no_of_pages_input").val(e.params.data.no_of_pages);
         });
