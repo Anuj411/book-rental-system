@@ -1,7 +1,7 @@
 sudo apt update
 sudo apt-get install python3-pip python3-dev git-core virtualenv redis-server default-libmysqlclient-dev  build-essential  pkg-config telnet nginx
 
-pip install -r ../requirements/production.txt
+sudo pip install -r ../requirements/production.txt
 
 sudo mv ./deployment/nginx.conf /etc/nginx/sites-available/project
 sudo mv ./deployment/gunicorn.conf /etc/systemd/system/gunicorn.service
