@@ -17,7 +17,7 @@ environ.Env.read_env(env_file=os.path.join(BASE_DIR, ".env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('DJANGO_SECRET')
 
-ALLOWED_HOSTS = env("ALLOWED_HOSTS", [])
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'book_rental.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql",
         "HOST": env("DATABASE_HOST"),
         "NAME": env("DATABASE_NAME"),
         "USER": env("DATABASE_USER"),
