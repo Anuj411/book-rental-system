@@ -4,11 +4,6 @@ sudo apt-get install python3-pip git-core virtualenv redis-server telnet nginx
 sudo systemctl start redis-server
 sudo systemctl enable redis-server
 
-sudo virtualenv venv
-source ./venv/bin/activate
-
-cd book-rental-system/book_rental
-
 pip install -r ../requirements/production.txt
 
 mv deployment/nginx.conf /etc/nginx/sites-available/project
