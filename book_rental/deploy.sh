@@ -3,8 +3,8 @@ pip install -r ../requirements/production.txt
 sudo apt update
 sudo apt-get install python3-pip git-core virtualenv redis-server telnet nginx
 
-sudo mv deployment/nginx.conf /etc/nginx/sites-available/project
-sudo mv deployment/gunicorn.conf /etc/systemd/system/gunicorn.service
+sudo mv ./deployment/nginx.conf /etc/nginx/sites-available/project
+sudo mv ./deployment/gunicorn.conf /etc/systemd/system/gunicorn.service
 
 python manage.py collectstatic
 python manage.py seed
