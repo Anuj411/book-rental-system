@@ -1,7 +1,7 @@
 django==4.2.16
 django-environ==0.10.0
 # mysqlclient==2.2.4
-psycopg2-binary==2.8.6
+psycopg2-binary==2.9.9
 django-allauth==0.52.0
 django-datatables-too==0.1.4
 Pillow==9.5.0

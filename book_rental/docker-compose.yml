@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: gunicorn book_rental.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+      - media_volume:/app/media
+    expose:
+      - "8000"
+    networks:
+      - django-network
+    environment:
+      - DB_HOST=db
+      - DB_NAME=book-rental-db
+      - DB_USER=root
+      - DB_PASSWORD=book@321
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/app/static
+      - media_volume:/app/media
+    depends_on:
+      - web
+    networks:
+      - django-network
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: book-rental-db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: book@321
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - django-network
+
+networks:
+  django-network:
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
